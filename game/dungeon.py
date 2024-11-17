@@ -4,14 +4,26 @@ from pathlib import Path
 
 from game.entities_dataclasses import Room, Enemy, Weapon, Armor, Player
 
+# Переменные для типов комнат
+START_ROOM: str = 'St'
+EMPTY_ROOM: str = ' '
+ENEMY_ROOM: str = 'E'
+EXIT_ROOM: str = 'Ex'
 
-DATA_DIR = Path(__file__).parent.parent / "data"
+# Путь к json файлам
+DATA_DIR: Path = Path(__file__).parent.parent / "data"
 
 
 def load_json(file_name: str) -> dict:
-    """Загружает данные из JSON-файла."""
-    with open(DATA_DIR / file_name, "r", encoding="utf-8") as file:
-        return json.load(file)
+    try:
+        with open(DATA_DIR / file_name, "r", encoding="utf-8") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        print(f"Ошибка: Файл {file_name} не найден.")
+        return {}
+    except json.JSONDecodeError:
+        print(f"Ошибка: Некорректный формат JSON в файле {file_name}.")
+        return {}
 
 
 class Dungeon:
@@ -34,14 +46,14 @@ class Dungeon:
 
         # Генерация комнат
         for room_type in self.__dungeon:
-            if room_type == ' ':
+            if room_type == EMPTY_ROOM:
                 self.rooms.append(self._create_empty_room(room_data))
-            elif room_type == 'E':
+            elif room_type == ENEMY_ROOM:
                 self.rooms.append(self._create_enemy_room(
                     room_data, enemy_data, enemy_items))
-            elif room_type == 'St':
+            elif room_type == START_ROOM:
                 self.rooms.append(Room(description="Стартовая комната"))
-            elif room_type == 'Ex':
+            elif room_type == EXIT_ROOM:
                 self.rooms.append(Room(description="Выход из подземелья"))
 
     def _create_player(self, player_data: dict, player_items: dict) -> Player:

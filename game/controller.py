@@ -22,12 +22,15 @@ class GameController:
     def describe_current_room(self) -> None:
         """Выводит описание текущей комнаты."""
         current_room = self.dungeon.get_room(self.current_position)
-        print(f"\nПеред вами {current_room.description}")
+        print("\n" + "=" * 50)
+        print(f"Комната {self.current_position + 1}/"
+              f"{self.dungeon.get_dungeon_size()}")
+        print(f"{current_room.description}")
         if current_room.has_enemy():
-            enemy = current_room.enemy
-            print(f"Здесь есть враг: {enemy.name}")
-            print(f"  Описание: {enemy.description}")
-            print(f"  Здоровье: {enemy.health}")
+            print(f"Враг: {current_room.enemy.name}")
+            print(f"  Описание: {current_room.enemy.description}")
+            print(f"  Здоровье: {current_room.enemy.health}")
+        print("=" * 50)
 
     def prompt_action(self) -> None:
         """Предлагает игроку действия и обрабатывает выбор."""
@@ -61,15 +64,22 @@ class GameController:
         return actions
 
     def get_player_choice(self, max_choice: int) -> int:
-        """Получает выбор игрока."""
         while True:
+            user_input = input("Введите номер действия "
+                               "(или 'выход' для завершения): ")
+            if user_input.lower() == 'выход':
+                self.is_game_over = True
+                print("Вы вышли из игры.")
+                exit()
             try:
-                choice = int(input("Введите номер действия: "))
+                choice = int(user_input)
                 if 1 <= choice <= max_choice:
                     return choice
-                print("Неверный ввод. Попробуйте снова.")
+                else:
+                    print("Пожалуйста, введите число из "
+                          "списка доступных действий.")
             except ValueError:
-                print("Пожалуйста, введите число.")
+                print("Некорректный ввод. Пожалуйста, введите число.")
 
     def execute_action(self, action: str, room: Room) -> None:
         """Выполняет выбранное действие."""

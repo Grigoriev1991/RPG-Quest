@@ -45,7 +45,7 @@ class Character:
         return self.health > 0
 
     def take_damage(self, damage: int) -> None:
-        """Уменьшает здоровье персонажа."""
+        """Уменьшает здоровье персонажа на заданное количество урона."""
         if damage > 0:
             self.health = max(0, self.health - damage)
 
