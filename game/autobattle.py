@@ -40,7 +40,13 @@ class AutoBattle:
         while player.is_alive() and enemy.is_alive():
             # Игрок атакует врага
             damage_to_enemy = player.attack(enemy)
-            enemy.take_damage(damage_to_enemy)
+            if damage_to_enemy > 0:
+                enemy.take_damage(damage_to_enemy)
+                print(f"{player.name} наносит "
+                      f"{damage_to_enemy} ед. урона {enemy.name}.")
+            else:
+                print(f"Сегодня {enemy.name} невредим, "
+                      f"{player.name} промахивается.")
 
             # Отображение здоровья после атаки игрока
             AutoBattle.draw_health_bar(
@@ -58,7 +64,13 @@ class AutoBattle:
 
             # Враг атакует игрока
             damage_to_player = enemy.attack(player)
-            player.take_damage(damage_to_player)
+            if damage_to_player > 0:
+                player.take_damage(damage_to_player)
+                print(f"{enemy.name} попадает по {player.name} "
+                      f"и наносит {damage_to_player} ед. урона.")
+            else:
+                print(f"{player.name} сегодня родился в рубашке "
+                      f"{enemy.name} не попадает.")
 
             # Отображение здоровья после атаки врага
             AutoBattle.draw_health_bar(

@@ -14,11 +14,10 @@ class Weapon:
 
     def attack(self, character: Character) -> int:
         """Рассчитывает нанесенный урон с учетом защиты цели."""
-        if random.randint(0, 100) <= self.hit_chance:
+        if random.randint(1, 100) <= self.hit_chance:
             defense = character.armor.defense
             damage = self.damage - defense
             actual_damage = max(damage, 0)
-            print(f"{self.name} здорово колечит.")
             return actual_damage
         return 0
 
@@ -49,9 +48,6 @@ class Character:
         """Уменьшает здоровье персонажа."""
         if damage > 0:
             self.health = max(0, self.health - damage)
-            print(f"{self.name} получает {damage} урона.")
-        else:
-            print(f"{self.name} сегодня родился в рубашке.")
 
     def attack(self, target: Character) -> int:
         """Атакует другого персонажа и возвращает нанесенный урон."""
