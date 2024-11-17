@@ -1,0 +1,40 @@
+# Python файлы
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Логи и отладочные файлы
+*.log
+*.sqlite3
+
+# Среды виртуального окружения
+venv/
+env/
+.venv/
+
+# Конфигурационные файлы IDE
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Файлы системы
+.DS_Store
+Thumbs.db
+
+# Секреты и токены (если есть)
+*.env
+
+# Компилированные файлы C
+*.so
+
+# Файлы тестов и покрытия
+.coverage
+*.cover
+*.pytest_cache/
+htmlcov/
+
+# Докер и другие артефакты
+docker-compose.override.yml
+*.log
