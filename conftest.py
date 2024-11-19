@@ -13,7 +13,7 @@ def weapon() -> Weapon:
     return Weapon(
         name="Тестовое оружие",
         damage=5,
-        hit_chance=75,
+        hit_chance=100,  # Гарантированное попадание
         description="Описание оружия",
     )
 
