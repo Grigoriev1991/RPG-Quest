@@ -65,19 +65,22 @@ class GameController:
 
     def get_player_choice(self, max_choice: int) -> int:
         while True:
-            user_input = input("Введите номер действия "
-                               "(или 'выход' для завершения): ")
-            if user_input.lower() == 'выход':
-                self.is_game_over = True
-                print("Вы вышли из игры.")
-                exit()
             try:
+                user_input = input("Введите номер действия "
+                                   "или 'выход' для завершения): ")
+                if user_input.lower() == 'выход':
+                    self.is_game_over = True
+                    print("Вы вышли из игры.")
+                    exit()
                 choice = int(user_input)
                 if 1 <= choice <= max_choice:
                     return choice
                 else:
-                    print("Пожалуйста, введите число из "
-                          "списка доступных действий.")
+                    print("Пожалуйста, введите число "
+                          "из списка доступных действий.")
+            except EOFError:
+                print("\nВвод недоступен. Игра завершена.")
+                exit()
             except ValueError:
                 print("Некорректный ввод. Пожалуйста, введите число.")
 
