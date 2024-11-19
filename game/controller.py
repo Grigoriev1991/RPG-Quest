@@ -22,7 +22,7 @@ class GameController:
     def describe_current_room(self) -> None:
         """Выводит описание текущей комнаты."""
         current_room = self.dungeon.get_room(self.current_position)
-        print("\n" + "=" * 50)
+        print("=" * 50)
         print(f"Комната {self.current_position + 1}/"
               f"{self.dungeon.get_dungeon_size()}")
         print(f"{current_room.description}")
@@ -37,7 +37,7 @@ class GameController:
         current_room = self.dungeon.get_room(self.current_position)
         actions = self.get_available_actions(current_room)
 
-        print("\nВаши действия:")
+        print("Ваши действия:")
         for i, action in enumerate(actions, 1):
             print(f"{i}. {action}")
 
@@ -67,7 +67,7 @@ class GameController:
         while True:
             try:
                 user_input = input("Введите номер действия "
-                                   "или 'выход' для завершения): ")
+                                   "(или 'выход' для завершения): ")
                 if user_input.lower() == 'выход':
                     self.is_game_over = True
                     print("Вы вышли из игры.")
@@ -98,7 +98,8 @@ class GameController:
     def move_to_room(self, new_position: int) -> None:
         """Перемещает игрока в новую комнату."""
         self.current_position = new_position
-        print("\nВы переместились в другую комнату.")
+        print("=" * 50)
+        print("Вы переместились в другую комнату.")
 
     def auto_fight(self, enemy: Enemy) -> None:
         """Запускает автобой с врагом."""

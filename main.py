@@ -4,8 +4,9 @@ from game.controller import GameController
 
 def run_game():
     """Запускает игру."""
+    print("=" * 50)
     print("Добро пожаловать в текстовую RPG!")
-    print("Вы отправляетесь в опасное подземелье. Будьте осторожны.\n")
+    print("Вы отправляетесь в опасное подземелье. Будьте осторожны.")
     game = GameController()
     game.start_game()
 

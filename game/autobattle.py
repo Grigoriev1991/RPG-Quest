@@ -3,7 +3,7 @@ import time
 from game.entities_dataclasses import Player, Enemy
 
 # Пауза между атаками в секундах
-ATTACK_DELAY: int = 3
+ATTACK_DELAY: int = 1
 
 # Цвета
 GREEN = "\033[32m"
